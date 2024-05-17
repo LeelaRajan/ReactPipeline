@@ -1,70 +1,24 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Creating CI Pipeline for React App and host it using Amazon S3
+Step 1: Create ReactApp 
+Step 2: Push the code to Github repo "https://github.com/LeelaRajan/ReactPipeline"
+Step 3: Create the IAM user in AWS cloud with provided policies [AmazonS3FullAccess & IAMUserChangePassword]
+![image](https://github.com/LeelaRajan/ReactPipeline/assets/46046284/2376e7a8-628f-4df3-b508-d38aafe05fc6)
+Step 4: Create an Access key from the security credential section of the newly created user
+Download .csv file for accesskey 
+Step 5:  Create an S3 bucket 
+Give a name to the bucket and enable ACLs.
+Untick Block all public access and tick the warning after reading it.
+![image](https://github.com/LeelaRajan/ReactPipeline/assets/46046284/588eca9c-f339-426b-96d3-14127e57891f)
+After this hit create bucket button and you are done with creating a new user and storage.
+Step 6: Go to the settings of your repo and select the secrets from the left section.
+Provide three secret key with their provided access keys.
+![image](https://github.com/LeelaRajan/ReactPipeline/assets/46046284/b17b010c-3c13-4011-b58a-4629c22c8c47)
+Step 7: Add one folder “.github\workflows” and add a new file in it and name it “main.yaml”. 
+Step 8: Go to the Action section and see the process
+![image](https://github.com/LeelaRajan/ReactPipeline/assets/46046284/0959d45c-5f01-4929-a187-cdd48ce6d2d7)
+Step 9:  All process is finished and the build file is uploaded to the given bucket name in aws.
+![image](https://github.com/LeelaRajan/ReactPipeline/assets/46046284/8a7c4b2e-8ae1-4606-bafe-4093a58a2e93)
+Step 10: Configure S3 for web hosting
+Now go to the Properties section and scroll down to the end. You can see the Static website hosting option. Click on edit and enable it and write index.html in the index document section. Then save changes.
+Now you can see a link in the static website hosting section. Open it in a new tab.
+![image](https://github.com/LeelaRajan/ReactPipeline/assets/46046284/db3cb4a9-5f5a-4287-8e54-88e6fdbdad89)
